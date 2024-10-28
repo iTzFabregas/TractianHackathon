@@ -1,0 +1,1 @@
+É necessário verificar o estado da máquina CNC, ela está fazendo um barulho esquisito. Preciso do passo a passo da verificação, EPIs, ferramentas necessárias.
