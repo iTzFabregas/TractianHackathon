@@ -1,1 +1,7 @@
 2024-10-28T14:38:43.190733-0300 INFO | app.py | get_ordem_procedencia | Requisição durou 92.42 seg.
+2024-10-28T16:35:26.124571-0300 INFO | app.py | get_os | Requisição durou 263.03 seg.
+2024-10-28T16:40:27.008155-0300 INFO | app.py | get_os | Requisição durou 300.88 seg.
+2024-10-28T16:40:27.017060-0300 ERROR | app.py | get_ordem_procedencia | Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2024-10-28T16:40:27.017251-0300 INFO | app.py | get_ordem_procedencia | Requisição durou 0.00 seg.
+2024-10-28T16:40:27.018036-0300 ERROR | app.py | get_ordem_procedencia | Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2024-10-28T16:40:27.018170-0300 INFO | app.py | get_ordem_procedencia | Requisição durou 0.00 seg.

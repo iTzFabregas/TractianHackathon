@@ -6,11 +6,27 @@ from src.nr12 import Checklist
 from log import logger, LoggerMessages
 import os
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 
-load_dotenv()
+# Configurando o middleware CORS
+origins = [
+    "http://localhost:5173",  # URL da sua aplicação React
+    "http://127.0.0.1:3000",  # Caso esteja usando localhost
+]
 
 # Criar servidor
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Permitir essas origens
+    allow_credentials=True,
+    allow_methods=["*"],     # Permitir todos os métodos (GET, POST, etc.)
+    allow_headers=["*"],     # Permitir todos os cabeçalhos
+)
+
+load_dotenv()
+
 
 # rotas da aplicacao
 @app.post("/os")
