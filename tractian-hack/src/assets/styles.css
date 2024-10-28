@@ -1,0 +1,24 @@
+/* styles.css */
+h1 {
+    @apply text-3xl font-bold mb-6; /* Tamanho e estilo do título principal */
+}
+
+h2 {
+@apply text-2xl font-bold mb-4; /* Estilo para subtítulos */
+}
+
+ul {
+@apply list-disc pl-5; /* Marcadores e preenchimento à esquerda */
+}
+
+ol {
+@apply list-decimal pl-5; /* Numeração e preenchimento à esquerda */
+}
+
+li {
+@apply mb-2; /* Margem entre os itens da lista */
+}
+
+p {
+@apply mb-4; /* Margem inferior nos parágrafos */
+}
