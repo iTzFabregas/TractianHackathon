@@ -1,1 +1,6 @@
 2024-10-28T14:38:43.190733-0300 INFO | app.py | get_ordem_procedencia | Requisição durou 92.42 seg.
+2024-10-28T15:32:25.892071-0300 INFO | app.py | get_ordem_procedencia | Requisição durou 144.97 seg.
+2024-10-28T15:41:37.576881-0300 INFO | app.py | get_ordem_procedencia | Requisição durou 111.57 seg.
+2024-10-28T15:46:46.434780-0300 INFO | app.py | get_os | Requisição durou 203.34 seg.
+2024-10-28T15:54:22.641497-0300 INFO | app.py | get_os | Requisição durou 105.95 seg.
+2024-10-28T15:57:52.717023-0300 INFO | app.py | get_os | Requisição durou 151.40 seg.
