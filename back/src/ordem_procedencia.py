@@ -1,6 +1,7 @@
 from crewai_tools import PDFSearchTool
 from crewai import Agent, Task, Crew, Process
 from langchain_openai import ChatOpenAI
+import pandas as pd
 import os
 from dotenv import load_dotenv
 
@@ -12,7 +13,9 @@ class OrdemProcedencia:
     def __init__(self, llm_model="gpt-4o-mini", temperature=0, max_retries=2):
         base_dir = os.path.dirname(os.path.dirname(__file__))  # Sobe um nível de src para back
         doc_path = os.path.join(base_dir, "files", "WEG-w22-three-phase-electric-motor-50029265-brochure-english-web.pdf")
-
+        csv_path = os.path.join(base_dir, "files", "Colinha de Códigos SAP.xlsx")
+        
+        self.tools_names = pd.read_excel(csv_path, usecols=[1, 2]).to_string(index = False)
         self.tool = PDFSearchTool(pdf=doc_path)
         self.model = ChatOpenAI(model=llm_model, temperature=temperature, max_retries=max_retries)
 
@@ -22,11 +25,9 @@ class OrdemProcedencia:
         self.html_transcriptor_agent = self.__create_html_transcriptor_agent()
 
     def execute(self, message):
-        self.tool
-
         rag_question_task = self.__create_rag_question_task(agent=self.rag_question_agent, message=message)
         rag_task = self.__create_rag_task(agent=self.rag_agent, message=message, task_context=[rag_question_task])
-        writer_task = self.__create_writer_task(agent=self.writer_agent, message=message, task_context=[rag_task])
+        writer_task = self.__create_writer_task(agent=self.writer_agent, message=message, tools_names=self.tools_names, task_context=[rag_task])
         html_transcriptor_task = self.__create_html_transcriptor_task(agent=self.html_transcriptor_agent, task_context=[writer_task])
 
         crew = self.__create_Crew(agents=[self.rag_question_agent,self.rag_agent,self.writer_agent, self.html_transcriptor_agent],
@@ -75,7 +76,8 @@ class OrdemProcedencia:
                 Você é um planejador sênior com mais de 10 anos de experiência que trabalha na Gearing, uma grande empresa do setor de metalurgia e manufatura de peças industriais.
                 Você é especialista em redatar Ordens de Serviço de Manutenção voltadas para os funcionários técnicos.
                 A Ordem de Procedimento deve conter linguagem técnica e objetiva, sendo preciso em quais tarefas e a ordem das tarefas que o técnico deve reaizar.
-                Opte por usar tópicos numerados e sucintos.   
+                O texto gerado deve ser completo de forma que o técnico não necessite de acessa o manual.
+                Opte por usar tópicos numerados e sucintos.
             """,
             verbose = False,
             max_iter = 10,
@@ -123,9 +125,9 @@ class OrdemProcedencia:
 
         return rag_task
     
-    def __create_writer_task(self, agent, message, task_context:list[Task]) -> Task:
+    def __create_writer_task(self, agent, message, tools_names, task_context:list[Task]) -> Task:
         writer_task = Task(
-            description=f"A partir das informações recuperadas pelo 'rag task' para a mensagem {message}, escreva uma Ordem de Procedimento para guiar o técnico de manutenção em seu trabalho. ",
+            description=f"A partir das informações recuperadas pelo 'rag task' para a mensagem {message}, escreva uma Ordem de Procedimento para guiar o técnico de manutenção em seu trabalho. Indique apenas a 'Descrição do Material/Equipamento' e o 'Código SAP' de ferramentas que estejam na lista:\n{tools_names}.",
             agent=agent,
             expected_output="""
                 Uma Ordem de Procedimento, contendo o passo-a-passo das tarefas as quais o técnico de manutenção deve seguir para completar seu trabalho.
