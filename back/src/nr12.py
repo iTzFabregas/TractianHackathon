@@ -43,7 +43,7 @@ class Checklist:
                 Sua área de atuação é na norma de gestão NR12.
                 Sua especialidade é receber mensagens genéricas e transformá-las em prompts ideiais para a tarefa de recuperação de informação. 
             """,
-            verbose = True,
+            verbose = False,
             max_iter = 10,
             memory = True,
             allow_delegation = False
@@ -56,7 +56,7 @@ class Checklist:
             role = "PDF Searcher",
             goal = f"""Faça a recuperação de informações a partir de um arquivo pdf. Leve em conta texto, tabelas e imagens.""",
             backstory = """Você é um especialista em recuperação de informação a partir de pdfs. Sua experiência é de receber uma mensagem e buscar no pdf a melhor parte que se relaciona com isso, seja texto, figura ou tabela.""",
-            verbose = True,
+            verbose = False,
             max_iter = 10,
             memory = True,
             tools = [self.tool],
@@ -76,7 +76,7 @@ class Checklist:
                 Deve conter linguagem técnica e objetiva.
                 Opte por usar tópicos principais e subtópicos quando necessário.
             """,
-            verbose = True,
+            verbose = False,
             max_iter = 10,
             memory = True,
             allow_delegation = False
@@ -93,7 +93,7 @@ class Checklist:
                 Sua especialidade é passar um texto em Markdown para um código HTML.
                 Gere apenas a seção <body> do código sem incluir a tag <body>.  
             """,
-            verbose = True,
+            verbose = False,
             max_iter = 10,
             memory = True,
             allow_delegation = False
@@ -150,7 +150,7 @@ class Checklist:
         crew = Crew(
             agents=agents,
             tasks=tasks,
-            verbose=True,
+            verbose = False,
             process=Process.hierarchical,
             full_output=True,
             share_crew=False,

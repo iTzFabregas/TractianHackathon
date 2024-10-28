@@ -2,7 +2,9 @@ from fastapi import FastAPI, HTTPException
 from time import time
 from models import OrdemRequest
 from src.ordem_procedencia import OrdemProcedencia
-from TractianHackathon.back.server.log import logger, LoggerMessages
+from src.nr12 import Checklist
+from log import logger, LoggerMessages
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -11,14 +13,16 @@ load_dotenv()
 app = FastAPI()
 
 # rotas da aplicacao
-@app.post("/os/")
+@app.post("/os")
 async def get_os(request: OrdemRequest) -> dict:
     start_time = time()
 
     try:
         message = {"message": request.message}
 
-        response
+        response = Checklist().execute(message=message)
+
+        return {"Response": response}
 
     except Exception as err:
         logger.error(err)
@@ -29,18 +33,14 @@ async def get_os(request: OrdemRequest) -> dict:
         duration = end_time - start_time
         logger.info(LoggerMessages.time_info(duration=duration))
 
-
-
-@app.post("/ordem-procedencia/")
+@app.post("/ordem-procedencia")
 async def get_ordem_procedencia(request: OrdemRequest) -> dict:
     start_time = time()
 
     try:
         message = {"message": request.message}
-        
-        doc_path = r"C:\Users\Pedro\OneDrive - Daimon Engenharia e Sistemas\Documentos\Development\TractianHackathon\back\files\WEG-w22-three-phase-electric-motor-50029265-brochure-english-web.pdf"
 
-        response = OrdemProcedencia(doc_path=doc_path).execute(message=message)
+        response = OrdemProcedencia().execute(message=message)
 
         return {"Response": response}
 
@@ -55,4 +55,4 @@ async def get_ordem_procedencia(request: OrdemRequest) -> dict:
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host=settings.HOST, port=settings.PORT)
+    uvicorn.run(app, host=os.getenv("HOST"), port=int(os.getenv("PORT")))
