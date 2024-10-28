@@ -14,7 +14,8 @@ export default {
                 '2.5': "10.5px", // Define um novo valor de padding
             },
             colors: {
-                'trac-blue': '#025ef4',  // Define sua cor personalizada
+                'trac-blue': '#025ef4',
+                'trac-lblue': '#4f87ff',
             },
             fontFamily: {
                 'poppins': ['Poppins', 'sans-serif'], 

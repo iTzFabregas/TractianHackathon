@@ -26,7 +26,7 @@ export default function Assistente() {
     return (
         <div className="w-full h-screen flex p-12 bg-gray-200">
             <div className="flex flex-col items-center w-8/12 bg-gray-200 text-center">
-                {status === 'idle' && <button className="bg-white border-solid border-2 border-trac-blue p-2 w-2/5 h-14 rounded-base text-xl font-bold text-trac-blue" onClick={(e) => handleClick(e)}>Criar uma nova ordem de serviço</button>}
+                {status === 'idle' && <button className="bg-white border-solid border-2 border-trac-blue p-2 w-2/5 h-14 rounded-base text-xl font-bold text-trac-blue hover:bg-trac-blue hover:text-white hover:border-white transition duration-200" onClick={(e) => handleClick(e)}>Criar uma nova ordem de serviço</button>}
 
                 {status === 'ready' && 
                 <div className="flex w-8/12 gap-10 items-center">
@@ -44,7 +44,7 @@ export default function Assistente() {
                 {items.map(item => (
                     <div className="m-5 bg-white auto-h rounded-base p-3 text-black">  
                         <h1 className="text-xl text-trac-blue font-bold"> Solicitação Nº {item.id}</h1> 
-                        <p>{item.text}</p>
+                        <p className='font-bold'>{item.text}</p>
                         <p>Estado: {item.estado}.</p>
                         <div className="text-center pt-4 pr-4 font-bold text-white text-2xl">
                             <button className="rounded bg-red-500 p-2" onClick={() => deleteItem(item.id)}>Excluir </button>
