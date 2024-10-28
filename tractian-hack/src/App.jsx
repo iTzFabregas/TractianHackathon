@@ -19,7 +19,8 @@ function App() {
                 <div className='w-1/2 flex flex-col items-start justify-center p-16 gap-20'>
 					<div className= "gap-10">
 						<h1 className="text-8xl font-bold mb-4 relative z-10 font-poppins"> Automatizamos Ordem de Serviços </h1>
-						<p className="font-jetbrains text-2xl mb-4 relative z-10"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis, nobis. Nulla, dolorum molestias beatae itaque aperiam nostrum totam eius ipsum pariatur ducimus minima harum magnam enim iusto, voluptatibus id. Nemo aliquid magni repellendus aperiam non placeat aut. Dolorem sint sed debitis nisi corporis ut fugiat, earum hic unde nihil aut exercitationem reprehenderit officiis? Rerum voluptas ipsum placeat, recusandae quam quidem in, aspernatur itaque quos commodi perspiciatis consectetur voluptate quia, corporis officiis beatae incidunt magni! Placeat culpa eligendi enim quidem tempore officiis, rerum ex odit aspernatur qui mollitia, voluptatem fugiat laudantium ipsam impedit velit? Voluptas doloribus ipsam consequuntur quo, aliquid praesentium?
+						<p className="font-jetbrains text-2xl mb-4 relative z-10"> 
+                            Clique em uma das opções abaixo para iniciar os serviços. Se você é assistente, criamos ordem de serviços automaticamente para você. Se você é manuntentor, damos instruções passo a passo com as devidas restrições de manuntenção.
 						</p>
 					</div> 
 					<div className='flex flex-row gap-20 font-bold text-4xl'>
