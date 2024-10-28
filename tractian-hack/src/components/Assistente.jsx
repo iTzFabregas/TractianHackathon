@@ -9,9 +9,9 @@ export default function Assistente() {
     const [text, setText] = useState('')
 
     const [items, setItems] = useState([
-        { id: 1, text: 'Item 1' },
-        { id: 2, text: 'Item 2' },
-        { id: 3, text: 'Item 3' },
+        { id: 1, text: 'Verificar lubrificação da máquina CNC.', estado: 'Crítico' },
+        { id: 2, text: 'Verificar super-aqueciento da máquina X.', estado: 'Crítico' },
+        { id: 3, text: 'Inspecionar linha de montagem Y', estado: 'Alerta' },
       ]);
 
     const deleteItem = (id) => {
@@ -19,9 +19,9 @@ export default function Assistente() {
     };
 
     const handleClick = (e) => {
-		setStatus('ready')
-		
+		setStatus('ready')	
 	}
+
 
     return (
         <div className="w-full h-screen flex p-12 bg-gray-200">
@@ -46,8 +46,8 @@ export default function Assistente() {
                         <div className="text-right pt-4 pr-4 font-bold text-red-500 text-2xl">
                             <button className="" onClick={() => deleteItem(item.id)}>X</button>
                         </div>
-                        <h2>Estado: CRÍTICO</h2>
-                        <h2>Estado: CRÍTICO</h2>
+                        <p>{item.text}</p>
+                        <p>Estado: {item.estado}.</p>
                     </div>
                 ))}
             </div>
