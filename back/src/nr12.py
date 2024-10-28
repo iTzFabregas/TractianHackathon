@@ -21,18 +21,22 @@ class Checklist:
         self.writer_agent = self.__create_writer_agent()
         self.html_transcriptor_agent = self.__create_html_transcriptor_agent()
         
-    def execute(self, message):
-        rag_question_task = self.__create_rag_question_task(agent=self.rag_question_agent, message=message)
-        rag_task = self.__create_rag_task(agent=self.rag_agent, message=message, task_context=[rag_question_task])
-        writer_task = self.__create_writer_task(agent=self.writer_agent, message=message, task_context=[rag_task])
-        html_transcriptor_task = self.__create_html_transcriptor_task(agent=self.html_transcriptor_agent, task_context=[writer_task])
+    def execute(self, message) -> str:
+        try:
+            rag_question_task = self.__create_rag_question_task(agent=self.rag_question_agent, message=message)
+            rag_task = self.__create_rag_task(agent=self.rag_agent, message=message, task_context=[rag_question_task])
+            writer_task = self.__create_writer_task(agent=self.writer_agent, message=message, task_context=[rag_task])
+            html_transcriptor_task = self.__create_html_transcriptor_task(agent=self.html_transcriptor_agent, task_context=[writer_task])
 
-        crew = self.__create_Crew(agents=[self.rag_question_agent,self.rag_agent,self.writer_agent, self.html_transcriptor_agent],
-                                  tasks=[rag_question_task,rag_task,writer_task, html_transcriptor_task])
+            crew = self.__create_Crew(agents=[self.rag_question_agent,self.rag_agent,self.writer_agent, self.html_transcriptor_agent],
+                                    tasks=[rag_question_task,rag_task,writer_task, html_transcriptor_task])
+            
+            response = crew.kickoff()
+
+            return response.raw.replace("```html", "").replace("```", "").strip()
         
-        response = crew.kickoff()
-
-        return response
+        except Exception as err:
+                raise err
 
     def __create_rag_question_agent(self) -> Agent:
         rag_question_agent = Agent(
